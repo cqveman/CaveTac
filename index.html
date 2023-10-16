@@ -9,8 +9,39 @@
 			integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
 			crossorigin="anonymous"
 		/>
-        <script src="script.js" defer></script>
+		<script src="script.js" defer></script>
+		<style>
+			td {
+				height: 150px;
+				vertical-align: middle;
+				cursor: pointer;
+			}
+		</style>
 		<title>CaveTac</title>
 	</head>
-	<body></body>
+	<body>
+		<div class="container my-5">
+			<h1 class="display-1 text-center mb-5">Tic Tac Toe</h1>
+			<table
+				class="table table-bordered border border-2 border-dark-subtle text-center"
+				id="gameboard"
+			>
+				<tr>
+					<td id="1">X</td>
+					<td id="2">X</td>
+					<td id="3">X</td>
+				</tr>
+				<tr>
+					<td id="4">X</td>
+					<td id="5">X</td>
+					<td id="6">X</td>
+				</tr>
+				<tr>
+					<td id="7">X</td>
+					<td id="8">X</td>
+					<td id="9">X</td>
+				</tr>
+			</table>
+		</div>
+	</body>
 </html>
