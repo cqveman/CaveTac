@@ -9,4 +9,11 @@ const gameBoard = (() => {
 	return { info: gameboardInfo };
 })();
 
+function createPlayer(name, symbol = "", move) {
+	const printName = () => `Player name is ${name}`;
+	const printSymbol = () => symbol.toUpperCase();
 
+	return { printName, printSymbol };
+}
+
+const cqveman = createPlayer("cqveman", "x");
