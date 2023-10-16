@@ -17,3 +17,8 @@ function createPlayer(name, symbol = "", move) {
 }
 
 const cqveman = createPlayer("cqveman", "x");
+
+const gameControl = (() => {
+    const winner = () => winner;
+    const isGameOver = () => isGameOver;
+})();
