@@ -3,8 +3,8 @@ const gameboard = (() => {
 	const columns = 3;
 	const board = [];
 
-	const X = createPlayer("Player", "x").printSymbol;
-	const O = createPlayer("Player", "o").printSymbol;
+	const X = createPlayer("Player", "x").printSymbol();
+	const O = createPlayer("Player", "o").printSymbol();
 	let currentPlayer = X;
 
 	for (let i = 0; i < rows; i++) {
