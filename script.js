@@ -6,7 +6,7 @@ const gameBoard = (() => {
 	];
 
 	const gameboardInfo = () => gameboard;
-	return { info: gameboardInfo };
+	return { gameboardInfo: gameboardInfo };
 })();
 
 function createPlayer(name, symbol = "", move) {
