@@ -22,22 +22,56 @@
 	<body>
 		<div class="container my-5">
 			<h1 class="display-1 text-center mb-5">Tic Tac Toe</h1>
+			<div class="h2" id="message">Player X's turn</div>
+			<button
+				class="btn btn-info restart-button my-3"
+				id="restart-button"
+			>
+				Restart
+			</button>
 			<div class="row">
 				<div class="col-12">
 					<div class="row">
-						<div id="field" class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-end-0">X</div>
-						<div id="field" class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-end-0">O</div>
-						<div id="field" class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle">X</div>
+						<div
+							class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-end-0"
+							data-index="0"
+						></div>
+						<div
+							class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-end-0"
+							data-index="1"
+						></div>
+						<div
+							class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle"
+							data-index="2"
+						></div>
 					</div>
 					<div class="row">
-						<div id="field" class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-end-0 border-top-0">X</div>
-						<div id="field" class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-end-0 border-top-0">O</div>
-						<div id="field" class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-top-0">X</div>
+						<div
+							class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-end-0 border-top-0"
+							data-index="3"
+						></div>
+						<div
+							class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-end-0 border-top-0"
+							data-index="4"
+						></div>
+						<div
+							class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-top-0"
+							data-index="5"
+						></div>
 					</div>
 					<div class="row">
-						<div id="field" class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-end-0 border-top-0">X</div>
-						<div id="field" class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-end-0 border-top-0">O</div>
-						<div id="field" class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-top-0">X</div>
+						<div
+							class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-end-0 border-top-0"
+							data-index="6"
+						></div>
+						<div
+							class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-end-0 border-top-0"
+							data-index="7"
+						></div>
+						<div
+							class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-top-0"
+							data-index="8"
+						></div>
 					</div>
 				</div>
 			</div>
