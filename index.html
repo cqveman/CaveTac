@@ -11,7 +11,7 @@
 		/>
 		<script src="script.js" defer></script>
 		<style>
-			td {
+			.row {
 				height: 150px;
 				vertical-align: middle;
 				cursor: pointer;
@@ -22,26 +22,25 @@
 	<body>
 		<div class="container my-5">
 			<h1 class="display-1 text-center mb-5">Tic Tac Toe</h1>
-			<table
-				class="table table-bordered border border-2 border-dark-subtle text-center"
-				id="gameboard"
-			>
-				<tr>
-					<td id="1">X</td>
-					<td id="2">X</td>
-					<td id="3">X</td>
-				</tr>
-				<tr>
-					<td id="4">X</td>
-					<td id="5">X</td>
-					<td id="6">X</td>
-				</tr>
-				<tr>
-					<td id="7">X</td>
-					<td id="8">X</td>
-					<td id="9">X</td>
-				</tr>
-			</table>
+			<div class="row">
+				<div class="col-12">
+					<div class="row">
+						<div id="field" class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-end-0">X</div>
+						<div id="field" class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-end-0">O</div>
+						<div id="field" class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle">X</div>
+					</div>
+					<div class="row">
+						<div id="field" class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-end-0 border-top-0">X</div>
+						<div id="field" class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-end-0 border-top-0">O</div>
+						<div id="field" class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-top-0">X</div>
+					</div>
+					<div class="row">
+						<div id="field" class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-end-0 border-top-0">X</div>
+						<div id="field" class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-end-0 border-top-0">O</div>
+						<div id="field" class="col d-flex align-items-center justify-content-center border border-2 border-dark-subtle border-top-0">X</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
