@@ -1,69 +1,109 @@
-const gameboard = (() => {
-	let board = [];
+"use strict";
 
-	const init = () => {
-		board = [null, null, null, null, null, null, null, null, null];
+const Player = (sign) => {
+	this.sign = sign;
+
+	const getSign = () => {
+		return sign;
 	};
 
-	const getBoard = () => board;
+	return { getSign };
+};
 
-	const reset = () => init();
+const gameBoard = (() => {
+	const board = ["", "", "", "", "", "", "", "", ""];
 
-	const makeMove = (player, position) => {
-		if (board[position] === null) {
-			board[position] = player;
-		} else {
-			alert("That spot is already taken. Please choose another one.");
+	const setField = (index, sign) => {
+		if (index > board.length) return;
+		board[index] = sign;
+	};
+
+	const getField = (index) => {
+		if (index > board.length) return;
+		return board[index];
+	};
+
+	const reset = () => {
+		for (let i = 0; i < board.length; i++) {
+			board[i] = "";
 		}
 	};
 
-	const displayTable = () => {
-		console.log(board);
-	};
-
-	return { init, getBoard, reset, makeMove, displayTable };
+	return { setField, getField, reset };
 })();
 
-function createPlayer(symbol = "") {
-	const getSymbol = () => symbol.toUpperCase();
+const displayController = (() => {
+	const fieldElements = document.querySelectorAll(".col");
+	const messageElement = document.getElementById("message");
+	const restartButton = document.getElementById("restart-button");
 
-	return { getSymbol };
-}
+	fieldElements.forEach((field) =>
+		field.addEventListener("click", (e) => {
+			if (gameController.getIsOver() || e.target.textContent !== "")
+				return;
+			gameController.playRound(parseInt(e.target.dataset.index));
+			updateGameboard();
+		})
+	);
 
-const gameController = (() => {
-	const player1 = createPlayer("X");
-	const player2 = createPlayer("O");
+	restartButton.addEventListener("click", (e) => {
+		gameBoard.reset();
+		gameController.reset();
+		updateGameboard();
+		setMessageElement("Player X's turn");
+	});
 
-	let currentPlayer = null;
-	let gameOver = false;
-
-	const startGame = () => {
-		gameboard.init();
-		currentPlayer = player1.getSymbol();
-		gameOver = false;
-		playGame();
-	};
-
-	const playGame = () => {
-		while (!gameOver) {
-			console.log("Current player:", currentPlayer);
-
-			gameboard.getBoard();
-			const position = prompt(
-				`Player ${currentPlayer}, enter a position (0-8): `
-			);
-			gameboard.displayTable();
-			gameboard.makeMove(currentPlayer, parseInt(position, 10));
-			checkGameStatus();
-			currentPlayer =
-				currentPlayer === player1.getSymbol()
-					? player2.getSymbol()
-					: player1.getSymbol();
+	const updateGameboard = () => {
+		for (let i = 0; i < fieldElements.length; i++) {
+			fieldElements[i].textContent = gameBoard.getField(i);
 		}
 	};
-	const checkGameStatus = () => {
-		const board = gameboard.getBoard();
-		const winningCombinations = [
+
+	const setResultMessage = (winner) => {
+		if (winner === "Draw") {
+			setMessageElement("It's a draw!");
+		} else {
+			setMessageElement(`Player ${winner} has won!`);
+		}
+	};
+
+	const setMessageElement = (message) => {
+		messageElement.textContent = message;
+	};
+
+	return { setResultMessage, setMessageElement };
+})();
+
+const gameController = (() => {
+	const playerX = Player("X");
+	const playerO = Player("O");
+	let round = 1;
+	let isOver = false;
+
+	const playRound = (fieldIndex) => {
+		gameBoard.setField(fieldIndex, getCurrentPlayerSign());
+		if (checkWinner(fieldIndex)) {
+			displayController.setResultMessage(getCurrentPlayerSign());
+			isOver = true;
+			return;
+		}
+		if (round === 9) {
+			displayController.setResultMessage("Draw");
+			isOver = true;
+			return;
+		}
+		round++;
+		displayController.setMessageElement(
+			`Player ${getCurrentPlayerSign()}'s turn`
+		);
+	};
+
+	const getCurrentPlayerSign = () => {
+		return round % 2 === 1 ? playerX.getSign() : playerO.getSign();
+	};
+
+	const checkWinner = (fieldIndex) => {
+		const winConditions = [
 			[0, 1, 2],
 			[3, 4, 5],
 			[6, 7, 8],
@@ -74,28 +114,24 @@ const gameController = (() => {
 			[2, 4, 6],
 		];
 
-		let isDraw = true;
-
-		for (let i = 0; i < winningCombinations.length; i++) {
-			const [a, b, c] = winningCombinations[i];
-			if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-				console.log(`Player ${board[a]} wins!`);
-				gameOver = true;
-				break;
-			}
-		}
-
-		for (let i = 0; i < board.length; i++) {
-			if (board[i] === null) {
-				isDraw = false;
-				break;
-			}
-		}
-		if (isDraw) {
-			console.log("It's a draw!");
-			gameOver = true;
-		}
+		return winConditions
+			.filter((combination) => combination.includes(fieldIndex))
+			.some((possibleCombination) =>
+				possibleCombination.every(
+					(index) =>
+						gameBoard.getField(index) === getCurrentPlayerSign()
+				)
+			);
 	};
 
-	return { startGame };
+	const getIsOver = () => {
+		return isOver;
+	};
+
+	const reset = () => {
+		round = 1;
+		isOver = false;
+	};
+
+	return { playRound, getIsOver, reset };
 })();
